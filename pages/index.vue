@@ -7,7 +7,7 @@
         <img height="240px" :src="url" /></p>
       <p id="reaction">
         favorite: {{ '💖'.repeat(tweet.favorite_count) }}
-        <span v-if="tweet.retweet_count > 0">retweet: {{ '♳'.repeat(tweet.retweet_count) }}</span>
+        <span v-if="tweet.retweet_count > 0">retweet: {{ '♻'.repeat(tweet.retweet_count) }}</span>
       </p>
       <p id="source">from: <span v-html="tweet.source"></span></p>
     </div>
