@@ -3,10 +3,13 @@
     <div id="content">
       <p id="created_at">{{ tweet.created_at }}</p>
       <p id="full_text">{{ tweet.full_text }}</p>
+      <p id="media_url" v-for="url in tweet.media_url_https" :key="url">
+        <img height="240px" :src="url" /></p>
       <p id="reaction">
         favorite: {{ '💖'.repeat(tweet.favorite_count) }}
         <span v-if="tweet.retweet_count > 0">retweet: {{ '⇄'.repeat(tweet.retweet_count) }}</span>
       </p>
+      <p id="source">from: <span v-html="tweet.source"></span></p>
     </div>
   </div>
 </template>
@@ -56,10 +59,15 @@ onMounted(async () => {
 #full_text {
   text-align: left;
 }
+#media_url {
+  text-align: center;
+}
 #reaction {
   text-align: right;
 }
-
+#source {
+  text-align: right;
+}
 @keyframes fadeIn {
   to {
     opacity: 1;
