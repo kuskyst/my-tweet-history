@@ -17,6 +17,7 @@
     "vuetify": "^3.7.3"
   },
   "devDependencies": {
+    "sass-embedded": "^1.80.5",
     "vue-cli-plugin-vuetify": "~2.5.8"
   }
 }
