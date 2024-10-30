@@ -37,14 +37,24 @@ onMounted(async () => {
 }
 #content {
   width: 70%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s forwards;
 }
 #created_at {
   text-align: left;
 }
 #full_text {
-  text-align: center;
+  text-align: left;
 }
 #reaction {
   text-align: right;
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 </style>
