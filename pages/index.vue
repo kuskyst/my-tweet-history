@@ -1,6 +1,6 @@
 <template>
-  <div id="container" v-if="tweet">
-    <div id="content">
+  <div id="container" v-if="!loading">
+    <div class="content" v-if="tweet">
       <p id="created_at">{{ tweet.created_at }}</p>
       <p id="full_text">{{ tweet.full_text }}</p>
       <p id="media_url" v-for="url in tweet.media_url_https" :key="url">
@@ -11,6 +11,7 @@
       </p>
       <p id="source">from: <span v-html="tweet.source"></span></p>
     </div>
+    <div class="content" v-else>今日はツイートしていませんでした...</div>
   </div>
 </template>
 
@@ -22,6 +23,7 @@ import axios from 'axios';
 const route = useRoute();
 const paramDate = route.query.date || '';
 const tweet = ref(null);
+const loading = ref(true);
 
 onMounted(async () => {
   const response = await axios.get('/data.json');
@@ -37,7 +39,10 @@ onMounted(async () => {
   const tweets = data
     .filter(tweet => tweet.tweet.created_at.startsWith(`${(target.getMonth() + 1).toString().padStart(2, '0')}/${target.getDate().toString().padStart(2, '0')}`))
     .filter(tweet => !tweet.tweet.full_text.includes("@"));
-  tweet.value = tweets[Math.floor(Math.random() * tweets.length)].tweet;
+  if (tweets.length > 0) {
+    tweet.value = tweets[Math.floor(Math.random() * tweets.length)].tweet;
+  }
+  loading.value = false;
 });
 </script>
 
@@ -47,12 +52,6 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   align-items: center;
-}
-#content {
-  width: 70%;
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 1s forwards;
 }
 #created_at {
   text-align: left;
@@ -68,6 +67,12 @@ onMounted(async () => {
 }
 #source {
   text-align: right;
+}
+.content {
+  width: 70%;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeIn 1s forwards;
 }
 .mark {
   letter-spacing: -8px;
