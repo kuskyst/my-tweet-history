@@ -33,6 +33,7 @@ onMounted(async () => {
   if (target.getMonth() !== month || target.getDate() !== day) {
     target = new Date();
   }
+
   const tweets = data
     .filter(tweet => tweet.tweet.created_at.startsWith(`${(target.getMonth() + 1).toString().padStart(2, '0')}/${target.getDate().toString().padStart(2, '0')}`))
     .filter(tweet => !tweet.tweet.full_text.includes("@"));
