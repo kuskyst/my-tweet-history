@@ -9,7 +9,6 @@ export default defineNuxtConfig({
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'description', content: '' }, // 必要に応じて内容を追加
         { name: 'format-detection', content: 'telephone=no' }
       ],
       link: [
