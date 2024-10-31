@@ -3,8 +3,11 @@
     <div class="content" v-if="tweet">
       <p id="created_at">{{ tweet.created_at }}</p>
       <p id="full_text">{{ tweet.full_text }}</p>
-      <p id="media_url" v-for="url in tweet.media_url_https" :key="url">
-        <img height="240px" :src="url" /></p>
+      <div id="media_url">
+        <div v-for="url in tweet.media_url_https" :key="url">
+          <img height="180px" :src="url" />
+        </div>
+      </div>
       <p id="reaction">
         favorite: <span class="mark">{{ '💖'.repeat(tweet.favorite_count) }}</span>
         <span v-if="tweet.retweet_count > 0">retweet: <span class="mark">{{ '♻'.repeat(tweet.retweet_count) }}</span></span>
@@ -37,7 +40,7 @@ onMounted(async () => {
   }
 
   const tweets = data
-    .filter(tweet => tweet.tweet.created_at.startsWith(`${(target.getMonth() + 1).toString().padStart(2, '0')}/${target.getDate().toString().padStart(2, '0')}`))
+    .filter(tweet => tweet.tweet.created_at.includes(`/${(target.getMonth() + 1).toString().padStart(2, '0')}/${target.getDate().toString().padStart(2, '0')}`))
     .filter(tweet => !tweet.tweet.full_text.includes("@"));
   if (tweets.length > 0) {
     tweet.value = tweets[Math.floor(Math.random() * tweets.length)].tweet;
@@ -48,7 +51,6 @@ onMounted(async () => {
 
 <style lang="scss">
 #container {
-  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -60,13 +62,18 @@ onMounted(async () => {
   text-align: left;
 }
 #media_url {
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 #reaction {
   text-align: right;
 }
 #source {
   text-align: right;
+}
+img {
+  margin: 0 20px;
 }
 .content {
   width: 70%;
