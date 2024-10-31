@@ -29,7 +29,7 @@ const tweet = ref(null);
 const loading = ref(true);
 
 onMounted(async () => {
-  const response = await axios.get('/data.json');
+  const response = await axios.get('./data.json');
   const data = await response.data.tweets;
 
   const month = parseInt(paramDate.substring(0, 2), 10) - 1;
@@ -54,6 +54,7 @@ onMounted(async () => {
   display: flex;
   justify-content: center;
   align-items: center;
+  height: 100%;
 }
 #created_at {
   text-align: left;
