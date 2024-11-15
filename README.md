@@ -1,11 +1,11 @@
-# my-tweet-history
-
 死んだとき(もしくはインターネットをやめたとき←つまり死んだときだが)、<br>
 フォロワが寂しくないように、わたしがこれまでしてきたツイートを日毎に毎日表示しつづけるホームページをつくるってのはどう？
 
-
-## How to Uses
+<details>
+<summary>How to Uses</summary>
+<br>
 ?date=yymmdで日付指定可
+<br><br>
 
 | # | |
 | ---- | ---- |
@@ -32,3 +32,4 @@ npm run build
 ```
 npm run lint
 ```
+</details>
